@@ -7,13 +7,14 @@
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
+    "nodemark": "^0.3.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bench": "node benchmark.js"
   },
   "author": "",
   "license": "ISC"

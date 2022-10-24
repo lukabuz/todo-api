@@ -70,6 +70,18 @@ module.exports = class PostgresInterface {
         return this.makeQuery('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id', [username, password]);
     }
 
+    dropTables() {
+        return this.makeQuery('DROP TABLE todos; DROP TABLE users;');
+    }
+
+    createBatchOfUsers(users) {
+        return this.makeQuery('INSERT INTO users (username, password) VALUES ' + users.map(user => `('${user.username}', '${user.password}')`).join(', ') + ";", []);
+    }
+
+    createBatchOfTodos(todos) {
+        return this.makeQuery('INSERT INTO todos (user_id, task, completed) VALUES ' + todos.map(todo => `(${todo.userId}, '${todo.task}', ${todo.completed})`).join(', ') + ";", []);
+    }
+
     async connect() {
         await this.client.connect();
     }
